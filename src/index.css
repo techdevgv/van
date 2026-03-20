@@ -1,0 +1,193 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap');
+
+@layer base {
+  :root {
+    --background: 220 20% 97%;
+    --foreground: 220 30% 12%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 220 30% 12%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 220 30% 12%;
+
+    --primary: 220 60% 18%;
+    --primary-foreground: 45 100% 96%;
+
+    --secondary: 42 100% 50%;
+    --secondary-foreground: 220 60% 12%;
+
+    --muted: 220 15% 92%;
+    --muted-foreground: 220 10% 46%;
+
+    --accent: 42 100% 50%;
+    --accent-foreground: 220 60% 12%;
+
+    --destructive: 0 72% 51%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 220 15% 88%;
+    --input: 220 15% 88%;
+    --ring: 42 100% 50%;
+
+    --radius: 0.75rem;
+
+    --sidebar-background: 220 60% 14%;
+    --sidebar-foreground: 220 15% 85%;
+    --sidebar-primary: 42 100% 50%;
+    --sidebar-primary-foreground: 220 60% 12%;
+    --sidebar-accent: 220 50% 22%;
+    --sidebar-accent-foreground: 220 15% 90%;
+    --sidebar-border: 220 40% 22%;
+    --sidebar-ring: 42 100% 50%;
+
+    /* Custom tokens */
+    --success: 152 60% 42%;
+    --success-foreground: 0 0% 100%;
+    --warning: 38 92% 50%;
+    --warning-foreground: 0 0% 100%;
+    --info: 210 80% 52%;
+    --info-foreground: 0 0% 100%;
+
+    --gradient-hero: linear-gradient(135deg, hsl(220 60% 14%) 0%, hsl(220 50% 24%) 50%, hsl(230 45% 30%) 100%);
+    --gradient-accent: linear-gradient(135deg, hsl(42 100% 50%) 0%, hsl(38 100% 55%) 100%);
+    --gradient-card: linear-gradient(180deg, hsl(0 0% 100%) 0%, hsl(220 20% 98%) 100%);
+    --shadow-card: 0 1px 3px hsl(220 30% 12% / 0.06), 0 4px 12px hsl(220 30% 12% / 0.04);
+    --shadow-elevated: 0 4px 6px hsl(220 30% 12% / 0.07), 0 12px 28px hsl(220 30% 12% / 0.09);
+
+    --font-display: 'Space Grotesk', sans-serif;
+    --font-body: 'Plus Jakarta Sans', sans-serif;
+  }
+
+  .dark {
+    --background: 220 30% 8%;
+    --foreground: 220 15% 92%;
+    --card: 220 30% 12%;
+    --card-foreground: 220 15% 92%;
+    --popover: 220 30% 12%;
+    --popover-foreground: 220 15% 92%;
+    --primary: 42 100% 50%;
+    --primary-foreground: 220 60% 12%;
+    --secondary: 220 40% 22%;
+    --secondary-foreground: 220 15% 92%;
+    --muted: 220 30% 16%;
+    --muted-foreground: 220 10% 55%;
+    --accent: 42 100% 50%;
+    --accent-foreground: 220 60% 12%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 220 30% 20%;
+    --input: 220 30% 20%;
+    --ring: 42 100% 50%;
+    --sidebar-background: 220 35% 8%;
+    --sidebar-foreground: 220 15% 85%;
+    --sidebar-primary: 42 100% 50%;
+    --sidebar-primary-foreground: 220 60% 12%;
+    --sidebar-accent: 220 30% 16%;
+    --sidebar-accent-foreground: 220 15% 90%;
+    --sidebar-border: 220 30% 16%;
+    --sidebar-ring: 42 100% 50%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-family: var(--font-body);
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-display);
+  }
+}
+
+@layer components {
+  .glass-card {
+    @apply bg-card/80 backdrop-blur-xl border border-border/50 rounded-xl;
+    box-shadow: var(--shadow-card);
+  }
+
+  .glass-card-elevated {
+    @apply bg-card/90 backdrop-blur-xl border border-border/50 rounded-xl;
+    box-shadow: var(--shadow-elevated);
+  }
+
+  .gradient-hero {
+    background: var(--gradient-hero);
+  }
+
+  .gradient-accent {
+    background: var(--gradient-accent);
+  }
+
+  .gradient-card {
+    background: var(--gradient-card);
+  }
+
+  .pulse-dot {
+    @apply relative;
+  }
+  .pulse-dot::after {
+    content: '';
+    @apply absolute inset-0 rounded-full;
+    animation: pulse-ring 2s ease-out infinite;
+    background: hsl(var(--success));
+  }
+
+  @keyframes pulse-ring {
+    0% { transform: scale(1); opacity: 0.6; }
+    100% { transform: scale(2.5); opacity: 0; }
+  }
+
+  .van-marker {
+    animation: van-bounce 2s ease-in-out infinite;
+  }
+
+  @keyframes van-bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-4px); }
+  }
+
+  /* Mobile safe areas */
+  .safe-area-top {
+    padding-top: env(safe-area-inset-top, 0px);
+  }
+
+  .safe-area-padding {
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+  }
+
+  .pb-safe {
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+  }
+
+  /* Smooth scrolling for mobile */
+  .smooth-scroll {
+    -webkit-overflow-scrolling: touch;
+    scroll-behavior: smooth;
+  }
+
+  /* Prevent text selection on interactive elements */
+  button, [role="button"] {
+    -webkit-tap-highlight-color: transparent;
+    touch-action: manipulation;
+  }
+}
+
+/* Ensure Leaflet maps don't overlap dialogs/modals */
+.leaflet-container {
+  z-index: 0 !important;
+}
+
+/* Ensure dialog overlays appear above Leaflet maps */
+[data-radix-portal] {
+  z-index: 1000 !important;
+}
